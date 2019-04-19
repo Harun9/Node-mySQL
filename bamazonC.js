@@ -1,6 +1,7 @@
 //importing mysql from the package
 var mysql = require("mysql");
 var inquirer = require('inquirer');
+var products = require("cli-products");
 
 // This are object variable which are used for connecting to mySQl database
 var connection = mysql.createConnection({
@@ -16,16 +17,19 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw (err);
     console.log("connection is successfull");
-
+    showTable();
 });
+function showTable() {
+    var showTable = 'SELECT * FROM products';
+    connection.query(showTable, function (error, results) {
+        for (var i = 0; i < results.length; i++) {
+            if (error) throw error;
+            console.log(results[i].itemID + " || " + results[i].product_name + " || " +
+                results[i].department_name + " || " + results[i].price + " || " + results[i].stock_quantity + "\n");
+        }
+    });
+}
 
-var showTable = 'SELECT *FROM products';
-connection.query(showTable, function (error, results, ) {
-    for (var i = 0; i < results.length; i++) {
-        if (error) throw error;
-        console.log(result[i].itemID + " || " + result[i].product_name + " || " +
-            result[i].department_name + " || " + result[i].price + " || " + result[i].stock_quantity + "\n");
 
-    }
 
-});
+
