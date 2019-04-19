@@ -29,4 +29,6 @@ PRIMARY KEY
         ('remotes', 'electronic', 10, 34),
         ('ovens', 'kitchen', 15, 35),
         ('milkbottle', 'utensil', 34, 40);
+    SELECT*
+    FROM products;
        
